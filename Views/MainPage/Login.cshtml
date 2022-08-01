@@ -1,0 +1,17 @@
+﻿@model Shag_Kursovaya.Models.User
+
+
+<div class="log_sign_in_form">
+    <h2>Вход в учетную запись</h2>
+    @using (Html.BeginForm("Login", "MainPage", FormMethod.Post, new { @class= "log_sign_in" }))
+    {
+        //<form action="Login" class="log_sign_in">
+            <div class="user_info_label">Логин:</div>
+            <input type="text" name="login">
+            <div class="user_info_label">Пароль:</div>
+            <input type="password" name="password">
+            <input type="submit" value="Войти" class="login_button" />
+            <a href="http://localhost:54612/MainPage/Registration">Регистрация</a>
+        //</form>
+    }
+</div>

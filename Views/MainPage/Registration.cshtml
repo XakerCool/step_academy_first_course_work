@@ -1,0 +1,26 @@
+﻿@model Shag_Kursovaya.Models.User
+
+@if(TempData["RegisterError"]!=null)
+{
+    <script>
+        alert('@TempData["RegisterError"]');
+    </script>
+}
+<div class="log_sign_in_form">
+    <h2>Регистрация пользователя</h2>
+    @using (Html.BeginForm("Registration", "MainPage", FormMethod.Post, new { @class = "log_sign_in" }))
+    {
+        //<form action="" class="log_sign_in">
+            <div class="user_info_label">Логин:</div>
+            <input type="text" name="login">
+            <div class="user_info_label">Почта:</div>
+            <input type="text" name="email">
+            <div class="user_info_label">Пароль:</div>
+            <input type="password" name="password">
+            <div class="user_info_label">Подтверждение пароля:</div>
+            <input type="password" name="confrim_password">
+            <a href="http://localhost:54612/MainPage/Login">Вход</a>
+            <input type="submit" value="Регистрация" class="sign_in_button">
+        //</form>
+    }
+</div>

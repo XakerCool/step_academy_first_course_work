@@ -1,0 +1,62 @@
+﻿@model Shag_Kursovaya.Models.User
+<script>
+    $.ajax({
+        type: 'GET',
+        url: 'http://localhost:54612/MainPage/FillMenu',
+        success: function (data) {
+            $(".menu_list").append(data);
+            //Добавление элемента в корзину
+            $('.in_cart').click(function (e) {
+                console.log($(this).closest('.menu_item_price').children('h2').text());
+                e.preventDefault();
+                $.ajax({
+                    type: 'GET',
+                    url: "http://localhost:54612/MainPage/AddInCart" + "?dishName=" + $(this).closest('.menu_item_price').children('h2').text(),
+                    success: function () {
+                        alert("Value Added");
+                    }
+                });
+            });
+        }
+    });
+    $('.pizza_category_button_link').click(function () {
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:54612/MainPage/FillCategoryMenu?category=pizza',
+            success: function (data) {
+                $('.menu_list').children().each(function (index, item) {
+                    $(item).remove();
+                });
+                $(".menu_list").append(data);
+            }
+        });
+    });
+    $('.burger_category_button_link').click(function () {
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:54612/MainPage/FillCategoryMenu?category=burger',
+            success: function (data) {
+                $('.menu_list').children().each(function (index, item) {
+                    $(item).remove();
+                });
+                $(".menu_list").append(data);
+            }
+        });
+    });
+    $('.top_users_dishes').click(function () {
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:54612/MainPage/UsersRecipes',
+            success: function (data) {
+                $('.menu_list').children().each(function (index, item) {
+                    $(item).remove();
+                });
+                $(".menu_list").append(data);
+            }
+        });
+    });
+</script>
+
+<div class="menu_list">
+
+</div>

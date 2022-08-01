@@ -1,0 +1,87 @@
+﻿@model Shag_Kursovaya.Models.User
+<script>
+    $(document).ready(function () {
+        $('.share_user_burger_form_button').click(function () {
+            var components = "";
+            if ($('#isUserLogined').val() == "true") {
+                var recipe_name_length = $('#recipeName').length;
+                if ($('#recipeName').val() == "") {
+                    $('#recipeName').css({ 'border': '1px solid #FF0000' });
+                }
+                else if ($('#recipeName').val().length > 50)
+                {
+                    alert('Название рецепта не должно превышать 50-ти символов');
+                }
+                else {
+                    console.log($('#recipeName').val());
+                    console.log($('#userId').val());
+                    $('.total_components_list').children().each(function (index, item) {
+                        components += $(item).text() + " ";
+                    });
+                    $.ajax({
+                        type: 'POST',
+                        url: "http://localhost:54612/MainPage/PublishUserBurger?recipeName=" + $('#recipeName').val() + "&userId=" + $('#userId').val() + "&composition=" + components + "&cost=" + $('.total_creating_burger_price').text(),
+                        success: function () {
+                            alert('Рецепт был добавлен в список');
+                        }
+                    });
+                }
+            }
+            else {
+                alert('Для публикации своего бургера, пройдите авторизацию!');
+            }
+        });
+    })
+</script>
+<div class="create_place">
+    <div class="create_place_content">
+        <div class="components_list">
+            <ul class="components_menu">
+                <li><div class="comp_button" name="cotlette" price="300">Котлета</div></li>
+                <li><div class="comp_button" name="salad_paper" price="100">Лист салата</div></li>
+                <li><div class="comp_button" name="tomato" price="150">Помидор</div></li>
+                <li><div class="comp_button" name="onion" price="100">Лук</div></li>
+                <li><div class="comp_button" name="cheese" price="100">Сыр</div></li>
+                <li><div class="comp_button" name="down_bun" price="200">Нижняя булка</div></li>
+            </ul>
+        </div>
+        <div class="burger">
+            <ul class="burger_parts_list">
+                <li class="burger_part" id="up_bun"><img src="~/Images/up_bun.png" alt=""></li>
+            </ul>
+            <div class="create_form">
+                <form class="burger_create_form" action="">
+                    <h2>Название: </h2>
+                    <input class="_input" type="text" name="recipeName" id="recipeName">
+                </form>
+
+                <div class="user_burger_form_buttons">
+                    <a href="" target="_blank" class="in_cart_user_burger_form_button"><div><span>В корзину</span></div></a>
+                    <a href="" target="_blank" class="share_user_burger_form_button"><div><span>Опубликовать</span></div></a>
+                </div>
+                <div class="total_price">
+                    <span>
+                        Цена:
+                    </span>
+                    <span class="total_creating_burger_price">
+                        200
+                    </span>
+                </div>
+                <div class="total_comp">
+                    <h2>Состав: </h2>
+                    <ul class="total_components_list">
+                        <li id="up_bun">Верхняя булка</li>
+                    </ul>
+                </div>
+                <ul class="sauces">
+                    <li class="sauce" id="ketchup" price="50"><img src="~/Images/ketchup_1.png" alt=""></li>
+                    <li class="" id="mustard" price="50"><img src="~/Images/mustard.png" alt=""></li>
+                </ul>
+                <div class="clear_button">
+                    <button class="clear_button_but" name="clear">Очистить все</button>
+                    <button class="delete_one_but" name="delete">Удалить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

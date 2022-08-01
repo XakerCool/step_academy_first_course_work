@@ -1,0 +1,32 @@
+﻿@model Shag_Kursovaya.Models.User
+
+    <div class="profile">
+        <div class="profile_content">
+            <!--Картинку в окончательный вариант, если смогу сохранить её в БД-->
+            <div class="profile_photo_block">
+                <div class="profile_photo">
+                    <img src="~/Images/temp_profile_photo.png" alt="">
+                </div>
+                <a href="" class="edit_profile_button">Редактировать</a>
+            </div>
+            <div class="user_info">
+                <ul class="user_info_list">
+                    <li>Логин:</li>
+                    <li class="user_info_content">@Model.Login</li>
+                    <li>Email:</li>
+                    <li class="user_info_content">@Model.Email</li>
+                    <li>Chef Rank: <span class="user_info_content">@Model.ChefRank</span></li>
+                    <li>Блюда:</li>
+                    <li>
+                        <ul class="user_dishes">
+
+                            @foreach (var item in Model.UserRecipes)
+                            {
+                                <li>@Html.ActionLink(item.RecipeName, "UserRecipeInfo", new { id = item.Id })</li>
+                            }
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>

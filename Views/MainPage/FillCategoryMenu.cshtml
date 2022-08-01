@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Shag_Kursovaya.Models.Dish>
+
+@foreach (var item in Model)
+{
+    <div class="menu_item">
+        <div class="menu_img">
+            <a href="" class="menu_item_link"><img class="menu_item_link_img" src="~/Images/@item.Picture" alt=""></a>
+        </div>
+        <div class="menu_item_price">
+            <h2 class="dish_name">@item.Name</h2>
+            <div class="price"><span class="current">@item.Cost</span></div>
+            <div class="in_cart_button">
+                <button class="in_cart"><img src="~/Images/cart.png" alt=""></button>
+            </div>
+        </div>
+    </div>
+}

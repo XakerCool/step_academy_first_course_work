@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Shag_Kursovaya.Models.Contact>
+
+    <ul class="contacts_menu_column_name">
+        @foreach (var item in Model)
+        {
+            if (item.Name == "email")
+            {
+                <li>Почта:</li>
+            }
+            else if (item.Name == "second_email")
+            {
+                <li>Резервная почта:</li>
+            }
+            else if (item.Name == "landline_number")
+            {
+                <li>номер:</li>
+            }
+            else if (item.Name == "cell_number")
+            {
+                <li>Сотовый номер: </li>
+            }
+            else if (item.Name == "reserve_cell_number")
+            {
+                <li>Резервный номер: </li>
+            }
+        }
+    </ul>
+<ul class="contacts_menu_column_value">
+    @foreach(var item in Model)
+    {
+        if(item.Name=="email" | item.Name=="second_email")
+        {
+            <li><a href="" class="link">@item.Value</a></li>
+            continue;
+        }
+        <li>@item.Value</li>
+    }
+</ul>
